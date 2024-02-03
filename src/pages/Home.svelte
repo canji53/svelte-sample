@@ -1,12 +1,14 @@
 <script lang="ts">
     import GameOver from "../components/Game/GameOver.svelte";
     import GameStart from "../components/Game/GameStart.svelte";
-    import GameJudge from "../components/Game/GameJudge.svelte";
-    // import Correct from "../components/Game/Correct.svelte";
-    // import InCorrect from "../components/Game/InCorrect.svelte";
+    import Correct from "../components/Game/Correct.svelte";
+    import InCorrect from "../components/Game/InCorrect.svelte";
     import Quiz from "../components/Game/Quiz.svelte";
+    import type { quizesType } from "../types";
 
     let flag: number = 0;
+    let count: number = 0;
+    export let quizes: quizesType[];
 </script>
 
 <main>
@@ -16,15 +18,13 @@
                 {#if flag === 0}
                     <GameStart bind:flag={flag} />
                 {:else if flag === 1}
-                    <Quiz bind:flag={flag} />
+                    <Quiz bind:flag={flag} bind:count={count} quizes={quizes} />
                 {:else if flag === 2}
-                    <GameJudge bind:flag={flag} />
-                <!-- {:else if flag === 2}
-                    <Correct flag={flag} />
+                    <Correct flag={flag} bind:count={count} quizes={quizes} />
                 {:else if flag === 3}
-                    <InCorrect flag={flag} /> -->
+                    <InCorrect flag={flag} />
                 {:else if flag === 4}
-                    <GameOver bind:flag={flag} />
+                    <GameOver bind:flag={flag} bind:count={count} />
                 {/if}
             </div>
         </div>

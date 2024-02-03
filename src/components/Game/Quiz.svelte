@@ -1,12 +1,17 @@
 <script lang="ts">
+    import type { quizesType } from "../../types";
+
     export let flag: number;
+    export let count: number;
+    export let quizes: quizesType[];
 
     let answer: string = "";
 
     const handleSubmit = () => {
         if (answer) {
-            if (answer == "ほうもん") {
+            if (answer == quizes[0].ans) {
                 flag = 2;
+                count += 1;
             } else {
                 flag = 3;
             }
@@ -19,10 +24,12 @@
 <div class="border border-black h-[500px] rounded flex justify-center items-center flex-col">
     <div class="text-center mb-2">
         <p class="text-3xl">
-            ⚪︎⚪︎⚪︎⚪︎
+            {#each Array(quizes[0].ans.length) as _, i}
+                ○
+            {/each}
         </p>
         <h2 class="text-7xl mb-3">
-            訪問
+            {quizes[0].ques}
         </h2>
     </div>
 
